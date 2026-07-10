@@ -1,0 +1,1 @@
+ This is a {"mask"}comment：{"placeholder": "text_a"}，this comment's sentiment may be either no-hate or hate.

@@ -32,6 +32,7 @@ pip install -r requirement.txt
 (3)Download the following pre-trained models from Hugging Face and place them in the `models/` folder:
 * **BERT-Chinese**: [bert-base-chinese](https://huggingface.co/bert-base-chinese)
 * **RoBERTa-Base**: [FacebookAI/roberta-base](https://huggingface.co/FacebookAI/roberta-base)
+
 (4)Place your custom datasets in: `datasets/TextClassification/`
 
 #### ▶️Run
@@ -52,6 +53,23 @@ This module builds upon the PT stage with iterative refinements.
 cp sotf_tuning.py Openprompt/openprompt/soft_tuning.py
 ```
 **Execution**: Follow the numerical order of the scripts in the `itera` folder to ensure the logic flows correctly.
+
+Example commands:
+```bash
+python fewshot.py \
+  --result_file ./output_fewshot.txt \
+  --dataset newsgroups1 \
+  --template_id 0 \
+  --seed 144 \
+  --shot 20 \
+  --verbalizer manual
+
+python 1-2.py
+python 3rep_train.py
+python 4cover.py
+python 5together.py
+python 6final_train.py
+```
 
 ### Phase 3: ACE Module
 This module provides optimized instruction prompts for LLMs.

@@ -1,0 +1,80 @@
+English:
+You are an analysis expert responsible for answering questions by combining your own knowledge with a carefully compiled handbook of strategies and insights.
+Instructions:
+1.Read the handbook carefully and apply the relevant strategies and insights appropriately.
+2.Pay attention to the common mistakes listed in the handbook and avoid repeating them.
+3.Show your reasoning process step by step; the analysis should be concise yet comprehensive.
+4.Before providing the final answer, be sure to verify your hypotheses and logic.
+Your output must be in JSON format and include the following fields:
+reasoning: your ideas / reasoning process / thought process, along with detailed analysis and planning.
+bullet_ids: each line in the handbook has a bullet_id. Please list the bullet_ids corresponding to all points in the handbook that are relevant and helpful to answering this question.
+final_answer: the answer.
+Handbook: {
+I. Core Definition and Objective of the Task
+1.1 Implicit hate speech: Online comments that do not rely on directly insulting vocabulary but, given specific context (event background, discussion topic, user history, internet slang), use sarcasm, negativity, or insults to convey any degree of hostility toward any ordinary individual or group.
+1.2 Context-dependent comments: Comments whose literal information is limited and meaning is ambiguous, such that one must rely on the surrounding context (related events, discussion topics, etc.) to determine their referent and stance; when literal information is insufficient and context is required, first provide a preliminary judgment and confidence based on linguistic signals, then explain how context would change or strengthen that judgment, avoiding treating context as the only premise.
+1.3 Task objective: The output uses a “dual-channel template.” (A) Context scenario hypotheses: list ≥2 feasible scenarios, each with key traceable clues and quantified confidence; (B) Malice-or-not judgment: for each scenario provide a provisional label and confidence, then—based on the most feasible scenario and the co-occurrence of linguistic signals—give the final label, rationale, and overall confidence (both implicit and explicit hate count as hate).
+1.4 Hostile tone identification checklist: When rhetorical questions, derogatory epithets, emphatic negation, fixed sarcastic collocations, dehumanizing terms, and exclusion appear and co-occur with an (explicit or implicit) target, then the hate criterion is met; if it is merely procedural/division-of-labor/generalized advice without co-occurrence of target and hostile signals, it does not constitute hate; maintain a strong-signal lexicon, and when such terms co-occur with group words or generalized quantifiers, default to hate candidates and prioritize review.
+
+II. Context Scenario Hypothesis Module
+2.1 Priority hypothesis dimensions: event association (specific content mentioned by the comment and group linkage), topic association (topic of the discussion area and group targeting), user history (the user’s past group-related remarks), semantic metaphors (internet slang/metaphors and the real groups they map to).
+2.2 Hypothesis validation principles: support scenario hypotheses with traceable information (e.g., topic/news titles, the previous message, quoted links, user history). If clues are weak, list ≥2 competing hypotheses, give each a provisional label (hate/non-hate) and confidence, and keep only key information that affects the conclusion; when external clues are lacking, you must complete a transparent preliminary judgment using linguistic signals and state the confidence—do not default to non-hate due to “missing context.”
+2.3 Error-avoidance strategy: avoid unfounded subjective speculation without clues, and do not add redundant information unrelated to the malice judgment; for each scenario retain only key information that affects the conclusion.
+2.4 Exception-handling rules: you may not default to non-hate on the grounds of “inability to supply key context.” When multiple scenarios conflict, clearly present each scenario’s provisional label and confidence differences and explain why some were not adopted; when strong linguistic signals exist, you must complete the labeling based on them and provide a confidence explanation.
+2.5 Low-risk generic expression identification: for expressions that do not target a specific entity and whose semantics are procedural/division-of-labor/objective process description, first mark them as low-risk types; still check whether “target + hostile signal” co-occur to decide whether to escalate to hate, and note in the conclusion that this is a preliminary judgment based on linguistic signals.
+
+III. Malice Judgment Module
+3.1 Judgment workflow: context scenario hypothesizing → verify the target (including institutions/individuals) and the true meaning of the vocabulary based on the selected scenario → provide a provisional label and confidence for each scenario → choose the most reasonable/most feasible scenario → produce the labeling result.
+3.2 Decision criteria: make the final label on the basis of the established scenario hypotheses; you must select the most reasonable/most feasible scenario for labeling and may not evade judgment due to uncertainty; when multiple scenarios are reasonable, prioritize the more feasible one that shows obvious hostility/exclusion; express uncertainty via confidence.
+3.3 Tone identification: when the comment is accompanied by derogation, sarcasm, or a hostile tone (including rhetorical questions, derision, emphatic negation), it should be labeled as hate.
+3.4 Common error avoidance: (i) Denying implicit hate due to the lack of explicit group terms; (ii) Using “inability to add context” as grounds to default to non-hate; (iii) Ignoring hostile tone signals such as sarcasm/derision; (iv) Failing to provide confidence notes; (v) Considering only attacks on protected groups as hate speech while ignoring attacks on ordinary groups.
+3.5 Decision-making under uncertainty: if multiple scenarios are reasonable and one is more feasible based on common sense/pragmatics and shows a clear sarcastic or derogatory targeting, label it as hate.
+3.6 Transparency for language-signal-driven judgments: when making a hate judgment solely on linguistic signals, you must: (i) clearly state that the basis comes from linguistic signals rather than external context; (ii) provide confidence for competing scenarios respectively.
+3.7 Distinguish personal attacks from criticism of behavior/opinions: if it only evaluates behavior or facts and lacks hostile signals, it should not be labeled as hate; once derogation, dehumanization, or exclusion and other hostile signals appear and clearly target individuals/groups, label as hate.
+3.8 Audit output requirements: the final answer must include: the listed scenarios and their clues, per-scenario provisional label + confidence, and the final choice with overall confidence; omission of any item renders the process incomplete.
+}
+Question: {Determine whether “{comment}” is hate speech}
+Please answer strictly in the following JSON format:
+{"reasoning": "[Your ideas / reasoning process / thought process, and detailed hypotheses about possible contextual scenarios]",
+"bullet_ids": [e.g., "1.1", "2.3"],
+"final_answer": "[If judged as hate speech, output 【1】; otherwise output 【0】"]}
+
+
+Chinese:
+你是一名分析专家，负责结合自身知识、精心整理的策略与见解手册来回答问题。
+说明：
+1.仔细阅读手册，合理运用其中相关的策略与见解
+2.留意手册中列出的常见错误，避免重蹈覆辙
+3.逐步展示你的推理过程，分析需简洁且全面
+4.提供最终答案前，务必核对猜想过程与逻辑
+你的输出需为 JSON 格式，包含以下字段：
+reasoning：你的思路 / 推理过程 / 思考流程，以及详细的分析与构思
+bullet_ids：手册中每一行内容都有一个 bullet_id。请列出手册中所有与回答该问题相关、有帮助的要点对应的 bullet_id
+final_answer：答案
+手册：{一、任务核心定义与目标
+1.1、隐性仇恨言论：不依赖直接侮辱性词汇，需结合特定语境（事件背景、讨论主题、用户历史、网络黑话）利用讽刺、负面、侮辱等手段对任一普通个人或群体传递任何程度敌意的网络评论
+1.2、上下文依赖评论：评论本身字面信息有限、含义模糊，必须结合前后文的关联事件、讨论主题等才能判断其指代和态度；当字面信息不足需依赖上下文时，应先给出基于语言信号的初步判定与置信度，再说明上下文如何改变或增强该判定，避免将上下文当作唯一前提
+1.3、任务目标：输出采用“双通道模板”。(A) 上下文语境猜测：列出≥2个可行语境、各自关键可追溯线索与数值化置信度；(B) 恶意与否判断：对每个语境给出临时标签与置信度，再基于最可行语境与语言信号共现给出最终标签、理由与总置信度（隐性与显性仇恨均为仇恨）
+1.4、敌意语气识别清单：当出现反问、轻蔑称谓、否定强化、固定讥讽搭配、去人化词与排斥等语言信号，并与（显式或隐含）指向对象共现时，则满足仇恨判定；若仅为流程性/分工性/泛化建议且无指向对象与敌意信号共现，不构成仇恨；应维护强信号词表，当其与群体词或泛化量词共现时，默认进入仇恨候选并优先审查
+
+二、上下文语境猜测模块
+2.1、优先猜测维度：事件关联（评论提及事件的具体内容及群体关联）、主题关联（讨论区主题及群体指向）、用户历史（用户过往群体相关言论）、语义隐喻（网络黑话 / 隐喻对应的真实群体）
+2.2、猜测验证原则：基于可追溯信息（如主题/新闻标题、上一条发言、引用链接、用户历史）支撑语境假设。若线索较弱，需列出≥2个竞争性假设，分别给出各自的临时标签（仇恨/非仇恨）与置信度，只保留影响结论的关键信息；当缺乏外部线索时，必须以语言信号完成透明初判并明示置信度，严禁据“缺上下文”默认非仇恨
+2.3、错误规避策略：避免无线索的主观猜测，不补充与恶意判断无关的冗余信息；对每个语境仅保留影响结论的关键信息
+2.4、异常处理规则：不得以“无法补充关键语境”为由默认非仇恨。多语境冲突时，明确呈现各情境的临时标签与置信度差异并说明未采纳原因；当存在强语言信号时，必须据此完成标注并给出置信度说明
+2.5、低风险通用表达识别：对未指向特定对象且语义为流程性/分工性/客观流程描述的表达，先标记为低风险语类；但仍需检索是否与“指向对象+敌意信号”共现，以决定是否升级为仇恨，并在结论处注明系基于语言信号的初判。
+
+三、恶意判断模块
+3.1、判断流程：上下文语境猜测 → 基于所选语境验证群体（含机构/个人）的指向与词汇真正含义 → 为各语境给出临时标签与置信度 → 选择最合理/最可行语境 →标注结果
+3.2、判断条件：在已建立的猜测语境基础上作出最终标签；必须选择最合理/最可行的语境进行标注，不得以不确定为由回避判断；在多个合理语境中，优先选择更可行且呈明显敌意/排斥指向的语境；用置信度体现不确定性
+3.3、语气识别：当评论伴随贬损、讥讽、敌意语气（含反问、轻蔑、否定强化），应标注为仇恨
+3.4、常见错误规避：① 以缺少显式群体词否定隐性仇恨；② 将“无法补充语境”当作默认非仇恨的依据；③ 忽视讥讽/轻蔑等敌意语气信号；④ 未给出置信度备注；⑤ 仅认为攻击受保护群体为仇恨言论而忽略对普通群体攻击的判断
+3.5、不确定性下的决策：若多个语境合理，其中存在一个基于常识/语用更可行且呈明显讥讽或贬损指向的情境，应据此标注为仇恨
+3.6、语言信号驱动判断透明度：当仅凭语言信号作出仇恨判定时，须：① 明确说明依据来自语言信号而非外部语境；② 对竞争性语境分别给出置信度
+3.7、区分人身攻击与行为/观点批评：若仅评价行为或事实且不含敌意信号，不应标注为仇恨；一旦出现贬损、去人化或排斥等敌意信号并明确指向个人/群体，则标注为仇恨。
+3.8、审计输出要求：最终答案需包含：所列语境及其线索、逐语境临时标签+置信度、最终选择与总置信度；缺失任一项视为流程不完整。}
+问题：{判断“{comment}”是否为仇恨言论}
+请严格按照以下 JSON 格式作答：
+{"reasoning": "[你的思路 / 推理过程 / 思考流程，以及详细的对可能出现的上下文语境的猜想]",
+"bullet_ids":[如"1.1","2.3"],
+"final_answer":"[若判断为仇恨言论则输出【1】，否则输出【0】"}

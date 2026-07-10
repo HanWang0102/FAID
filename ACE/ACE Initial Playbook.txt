@@ -1,0 +1,26 @@
+I. Core Task Definition and Goals
+	1.1 Implicit hate speech: 
+	Online comments that do not rely on directly insulting vocabulary, and that need to be interpreted together with a specific context (event background, discussion topic, user history, internet slang) to convey hostility by means such as sarcasm and negativity.
+	1.2 Context-Dependent comments: 
+	Comments whose literal information is limited and whose meaning is ambiguous, for which one must combine the surrounding context---related events, discussion topics, etc.---to determine their reference and attitude.
+	1.3 Task goal: 
+	The LLM must output "Contextual Inference" (supplement key contextual background) and "Malice Determination" (label as hate speech / non-hate speech). Note that both implicit and explicit hate speech are considered hate speech.
+	
+	II. Contextual Inference Module
+	2.1 Priority inference dimensions: 
+	Event association (the specific content of the event mentioned by the comment and its group associations), topic association (the discussion area's topic and its group targeting), user history (the user's past group-related remarks), semantic metaphor (internet slang / metaphors corresponding to real groups).
+	2.2 Hypothesis verification principles: 
+	Base contextual assumptions on traceable information (such as the topic/news headline, the previous post, quoted links, user history). If clues are weak, list >=2 competing hypotheses and provide each one's hate determination and confidence, retaining only key information that affects the conclusion.
+	2.3 Error-avoidance strategy: 
+	Avoid subjective guessing without clues; do not add redundant information unrelated to the malice judgment.
+	2.4 Exception-handling rules: 
+	When there are no contextual clues, mark "Unable to supplement key context"; when multiple contexts conflict, fully list each possibility and the differences in judgment.
+	
+	III. Malice Determination Module
+	3.1 Judgment flow: 
+	Contextual inference -> verify group targeting and the true meaning of vocabulary based on the context -> output the label.
+	3.2 Judgment condition: 
+	On the basis of the guessed contextual situation, directly regard the previously guessed context as the real context.
+	3.3 Joint treatment of explicit and implicit expressions with tone recognition: 
+	An explicit group term is not a necessary condition for a hate determination; when the context targets any person, group, or institution and is accompanied by a disparaging, mocking, or hostile tone (including rhetorical questions, condescension, negation intensification), it should likewise be labeled as hate.
+	3.4 Common mistakes to avoid:

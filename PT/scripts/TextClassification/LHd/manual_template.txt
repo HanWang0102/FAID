@@ -1,0 +1,1 @@
+Comments with easily identifiable surface-level intents are 'Shallow Comment'; those with identifiable time, place, person, or event clues are 'Targeted Comment'; those with ambiguous meaning requiring context to reveal intent are 'Context-dependent Comment'. {"placeholder": "text_a"}, determine if this comment is {"mask"}
